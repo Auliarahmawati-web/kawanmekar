@@ -11,22 +11,33 @@
 </head>
 <body class="bg-white text-gray-800">
 
-<!-- Navbar -->
+<!-- ✅ Navbar -->
 <header class="bg-white shadow-md border-b sticky top-0 z-50">
-  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-    
-    <!-- Logo + Teks -->
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Logo -->
     <div class="flex items-center space-x-3">
-      <img src="b.png" alt="Logo Kawan Mekar" class="w-12 h-12 object-contain" />
-      <h1 class="text-2xl font-bold text-red-600">Kawan Mekar</h1>
+      <img src="b.png" alt="Logo Kawan Mekar" class="w-10 h-10 object-contain" />
+      <h1 class="text-xl font-bold text-red-600">Kawan Mekar</h1>
     </div>
-
-   <!-- Navigasi -->
-<nav class="flex items-center space-x-6">
-   <a href="#tentang" class="text-gray-700 hover:text-red-600">Tentang</a>
-  <a href="#program" class="text-gray-700 hover:text-red-600">Program</a>
-  <a href="#gabung" class="text-white bg-red-600 px-4 py-2 rounded hover:bg-red-700">Gabung</a>
-</nav>
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex items-center space-x-6">
+      <a href="#tentang" class="text-gray-700 hover:text-red-600 font-medium">Tentang</a>
+      <a href="#program" class="text-gray-700 hover:text-red-600 font-medium">Program</a>
+      <a href="#gabung" class="text-white bg-red-600 px-4 py-2 rounded hover:bg-red-700 font-medium">Gabung</a>
+    </nav>
+    <!-- Hamburger -->
+    <button id="nav-toggle" class="md:hidden p-2 border rounded text-red-600 border-red-600 focus:outline-none">
+      <svg class="fill-current h-5 w-5" viewBox="0 0 20 20">
+        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+      </svg>
+    </button>
+  </div>
+  <!-- Mobile Menu -->
+  <nav id="nav-menu" class="hidden flex-col px-4 pb-4 md:hidden space-y-2">
+    <a href="#tentang" class="block text-gray-700 hover:text-red-600">Tentang</a>
+    <a href="#galeri" class="block text-gray-700 hover:text-red-600">Galeri</a>
+    <a href="#gabung" class="block text-center bg-red-600 text-white py-2 rounded hover:bg-red-700">Gabung</a>
+  </nav>
 </header>
 
 
@@ -167,6 +178,22 @@
     AOS.init({
       duration: 1000,
       once: true
+    });
+    // Navbar hamburger toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      var navToggle = document.getElementById('nav-toggle');
+      var navMenu = document.getElementById('nav-menu');
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+          navMenu.classList.toggle('hidden');
+        });
+        // Tutup menu saat link diklik (mobile)
+        navMenu.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            if(window.innerWidth < 768) navMenu.classList.add('hidden');
+          });
+        });
+      }
     });
   </script>
 
